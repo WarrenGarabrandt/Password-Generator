@@ -71,6 +71,7 @@
             this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Numbers:";
+            this.label1.Visible = false;
             // 
             // nudNumbers
             // 
@@ -88,6 +89,7 @@
             0,
             0,
             0});
+            this.nudNumbers.Visible = false;
             // 
             // nudSymbols
             // 
@@ -105,6 +107,7 @@
             0,
             0,
             0});
+            this.nudSymbols.Visible = false;
             // 
             // label2
             // 
@@ -114,6 +117,7 @@
             this.label2.Size = new System.Drawing.Size(55, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "Symbols:";
+            this.label2.Visible = false;
             // 
             // Form1
             // 
