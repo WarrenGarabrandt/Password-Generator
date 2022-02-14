@@ -17,7 +17,6 @@ namespace Password_Generator
             InitializeComponent();
         }
 
-        public List<string> WordList = null;
 
         private void cmdGenerate_Click(object sender, EventArgs e)
         {
@@ -26,28 +25,7 @@ namespace Password_Generator
             {
                 int numsToDo = 2;
                 int symbToDo = 2;
-                if (WordList == null)
-                {
-                    WordList = new List<string>();
-                    using (var f = System.IO.File.OpenText("wordlist.txt"))
-                    {
-                        string line;
-                        while ((line = f.ReadLine()) != null)
-                        {
-                            if (line.Length >= 5 && line.Length < 9)
-                            {
-                                WordList.Add(line);
-                            }
-                        }
-                    }
-                }
-                //using (var f = System.IO.File.CreateText("shortlist.txt"))
-                //{
-                //    foreach (var line in WordList)
-                //    {
-                //        f.WriteLine(line);
-                //    }
-                //}
+
                 bool Good = false;
                 int first = 0;
                 int second = 0;
@@ -56,12 +34,12 @@ namespace Password_Generator
 
                 while (!Good)
                 {
-                    first = rnd.Next(WordList.Count);
+                    first = rnd.Next(Words.WordList.Count);
                     second = -1;
                     for (int i = 0; i < 1000; i++)
                     {
-                        second = rnd.Next(WordList.Count);
-                        len = WordList[first].Length + WordList[second].Length;
+                        second = rnd.Next(Words.WordList.Count);
+                        len = Words.WordList[first].Length + Words.WordList[second].Length;
                         if (len >= 12 && len < 16)
                         {
                             Good = true;
@@ -70,8 +48,8 @@ namespace Password_Generator
                     }
                 }
                 string[] symb = new string[] { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")" };
-                int mPos = WordList[first].Length;
-                string pwd = WordList[first] + WordList[second];
+                int mPos = Words.WordList[first].Length;
+                string pwd = Words.WordList[first] + Words.WordList[second];
                 // always capitalize 'l' because its easy to confuse, but these don't count toward the required capital letter count.
                 pwd = pwd.Replace('l', 'L');
                 List<int> positions = new List<int>();

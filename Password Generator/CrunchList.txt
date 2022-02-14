@@ -1,0 +1,38 @@
+﻿This collapses a text file into as few a number of lines as possible.
+This was useful when turning wordlist into Words class.
+
+
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            using (var f = File.OpenText(ofd.FileName))
+                            using (var o = File.CreateText(saveFileDialog.FileName))
+                            {
+                                StringBuilder sb = new StringBuilder();
+                                string line;
+                                while ((line = f.ReadLine()) != null)
+                                {
+                                    if (sb.Length + line.Length + 1 > 160)
+                                    {
+                                        o.WriteLine(sb.ToString());
+                                        sb.Clear();
+                                    }
+                                    sb.Append(" ");
+                                    sb.Append(line);
+                                }
+                                if (sb.Length > 0)
+                                {
+                                    o.WriteLine(sb.ToString());
+                                    sb.Clear();
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
